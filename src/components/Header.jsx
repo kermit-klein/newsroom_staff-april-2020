@@ -2,22 +2,24 @@ import React from "react";
 import { Menu, Container } from "semantic-ui-react";
 import auth from "../modules/auth";
 import { Redirect } from "react-router-dom";
-import { connect, useSelector } from 'react-redux'
+import { connect } from "react-redux";
 
 const Header = (props) => {
   const logOut = async () => {
-    try {
-      await auth.signOut();
-      props.setAuthenticated(false);
-    } catch (error) {
-      console.log(error);
-    }
+    await auth.signOut();
+    props.dispatch({
+      type: "LOG_OUT",
+      payload: {
+        authenticatedAs: "",
+        uid: "",
+      },
+    });
   };
 
-  const uid = useSelector(state => state.uid)
+  const redirect = !props.authenticatedAs && (
+    <Redirect to={{ pathname: "/" }} />
+  );
 
-  const redirect = !useSelector(state => state.authenticatedAs) && <Redirect to={{ pathname: "/" }} />;
-  debugger;
   return (
     <Container className="header">
       {redirect}
@@ -25,17 +27,13 @@ const Header = (props) => {
         <Menu.Item>
           <h1>Daily News Sense</h1>
         </Menu.Item>
-        {useSelector(state => state.authenticatedAs) && (
+        {props.authenticatedAs && (
           <>
             <Menu.Item active>Write</Menu.Item>
-            <Menu.Item
-              position="right"
-              id="logout"
-              onClick={() => logOut()}
-            >
+            <Menu.Item position="right" id="logout" onClick={() => logOut()}>
               <h4>
                 Log out <br />
-                {uid}
+                {props.uid}
               </h4>
             </Menu.Item>
           </>
@@ -44,4 +42,11 @@ const Header = (props) => {
     </Container>
   );
 };
-export default connect()(Header);
+
+const mapStateToProps = (state) => {
+  return {
+    authenticatedAs: state.authenticatedAs,
+    uid: state.uid,
+  };
+};
+export default connect(mapStateToProps)(Header);

@@ -12,13 +12,11 @@ import configureStore from "./state/store/configureStore";
 axios.defaults.baseURL = "http://localhost:3000/api";
 const store = configureStore();
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

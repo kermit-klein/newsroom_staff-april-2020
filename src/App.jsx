@@ -6,8 +6,8 @@ import { Switch, Route } from "react-router-dom";
 import auth from "./modules/auth";
 
 const App = () => {
-  const [uid, setUid] = useState("");
-  const [authenticated, setAuthenticated] = useState(false);
+  //   const [uid, setUid] = useState("");
+  //   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     async function validate() {
@@ -17,7 +17,7 @@ const App = () => {
         );
         try {
           const response = await auth.validateToken(tokenParams);
-          setAuthenticated(response.success);
+          //   setAuthenticated(response.success);                  #Set role here
         } catch (error) {
           console.log(error);
         }
@@ -29,9 +29,9 @@ const App = () => {
   return (
     <div className="App">
       <Header
-        uid={uid}
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
+      // uid={uid}
+      // authenticated={authenticated}
+      // setAuthenticated={setAuthenticated}
       />
       <Switch>
         <Route
@@ -39,19 +39,16 @@ const App = () => {
           path="/"
           render={() => (
             <LoginForm
-              setUid={setUid}
-              authenticated={authenticated}
-              setAuthenticated={setAuthenticated}
+            //   setUid={setUid}
+            //   authenticated={authenticated}
+            //   setAuthenticated={setAuthenticated}
             />
           )}
         />
-        <Route
-          path="/write"
-          component={CreateArticle}
-        />
+        <Route path="/write" component={CreateArticle} />
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

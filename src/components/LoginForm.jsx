@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Input, Grid } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import { connect, useSelector } from 'react-redux'
+import { connect } from "react-redux";
+import auth from "../modules/auth";
 
 const LoginForm = (props) => {
+  const [message, setMessage] = useState("");
 
-  const submitHandler = async e => {
-    await props.dispatch({ type: "LOG_IN", payload: { email: e.target.email.value, password: e.target.password.value}})
-    debugger;
-    console.log(e)
-  }
+  const logIn = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await auth.signIn(
+        e.target.email.value,
+        e.target.password.value
+      );
 
-  const redirect = useSelector(state => state.authenticatedAs) && (
+      props.dispatch({
+        type: "LOG_IN",
+        payload: {
+          authenticatedAs: response.data.role,
+          uid: response.data.uid,
+        },
+      });
+    } catch (error) {
+      setMessage(error.response.data.errors[0]);
+    }
+  };
+  debugger;
+  const redirect = props.authenticatedAs && (
     <Redirect to={{ pathname: "/write" }} />
   );
 
@@ -20,18 +36,25 @@ const LoginForm = (props) => {
       {redirect}
       <Grid className="login-container" verticalAlign="middle">
         <Grid.Column align="center">
-          <Form onSubmit={ (e) => submitHandler(e) } id="login-form">
+          <Form onSubmit={logIn} id="login-form">
             <h1>Log in</h1>
             <h4>Email</h4>
             <Input name="email" type="email" id="email"></Input>
             <h4>Password</h4>
             <Input name="password" type="password" id="password"></Input>
             <Button id="submit">Submit</Button>
-            <p id="error-message">{ useSelector(state => state.loginMessage) }</p>
+            <p id="error-message">{message}</p>
           </Form>
         </Grid.Column>
       </Grid>
     </>
   );
 };
-export default connect()(LoginForm);
+
+const mapStateToProps = (state) => {
+  return {
+    authenticatedAs: state.authenticatedAs,
+  };
+};
+
+export default connect(mapStateToProps)(LoginForm);
