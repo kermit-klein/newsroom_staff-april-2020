@@ -31,6 +31,7 @@ const LoginForm = (props) => {
         setMessage("Invalid login credentials");
       }
     } catch (error) {
+      debugger;
       setMessage(error.response.data.errors[0]);
     }
   };
