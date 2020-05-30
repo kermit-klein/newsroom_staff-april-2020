@@ -13,7 +13,6 @@ if (process.env.NODE_ENV == "production") {
 } else if (process.env.NODE_ENV == "development") {
   axios.defaults.baseURL = process.env.REACT_APP_LOCALURL;
 }
-debugger;
 const store = configureStore();
 window.store = store;
 ReactDOM.render(
