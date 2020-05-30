@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === "production") {
 
 const auth = new JtockAuth({
   host: jtockURL,
-  prefixUrl: "/api",
   debug: false,
 });
 
