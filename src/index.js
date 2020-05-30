@@ -8,9 +8,9 @@ import axios from "axios";
 import "./css/index.css";
 import { Provider } from "react-redux";
 import configureStore from "./state/store/configureStore";
-if (process.env.NODE_ENV == "production") {
+if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = process.env.REACT_APP_HEROKUURL;
-} else if (process.env.NODE_ENV == "development") {
+} else if (process.env.NODE_ENV === "development") {
   axios.defaults.baseURL = process.env.REACT_APP_LOCALURL;
 }
 const store = configureStore();
