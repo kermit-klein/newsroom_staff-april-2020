@@ -29,7 +29,7 @@ describe("Journalist can create an article", () => {
     it("the input fields are cleared on submission", () => {
       cy.get("input#title").type("This is the title");
       cy.get("textarea#body").type(
-        "This is the body this is the body this is the body this is the body this is the body."
+        "This is the body"
       );
 
       cy.get("#category").click();
@@ -38,8 +38,8 @@ describe("Journalist can create an article", () => {
       cy.get("#preview-image").should("be.visible");
       cy.get("#post").click();
       cy.get("#message").should("contain", "Article successfully created!");
-      cy.get("input#title").should("be.empty");
-      cy.get("input#body").should("be.empty");
+      cy.get("input#title").should("not.have.value", "This is the title");
+      cy.get("textarea#body").should("not.have.value", "This is the body");
       cy.wait(2000);
       cy.get("#message").should("not.exist");
     });
