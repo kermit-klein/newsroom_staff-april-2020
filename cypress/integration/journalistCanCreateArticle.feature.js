@@ -31,7 +31,6 @@ describe("Journalist can create an article", () => {
       cy.get("textarea#body").type(
         "This is the body"
       );
-
       cy.get("#category").click();
       cy.get("#category > .visible > :nth-child(2)").click();
       cy.file_upload("img.jpeg", "#image-upload", "image/jpeg");
@@ -40,8 +39,8 @@ describe("Journalist can create an article", () => {
       cy.get("#message").should("contain", "Article successfully created!");
       cy.get("input#title").should("not.have.value", "This is the title");
       cy.get("textarea#body").should("not.have.value", "This is the body");
-      cy.wait(2000);
-      cy.get("#message").should("not.exist");
+      cy.wait(3000);
+      cy.get("#message").should("not.be.visible");
     });
   });
 

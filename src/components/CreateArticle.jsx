@@ -38,7 +38,9 @@ const CreateArticle = () => {
         },
         { headers: headers }
       );
+      e.target.reset()
       setMessage(response.data.message);
+      setTimeout(() => {setMessage("")}, 3000)
     } catch (error) {
       setMessage(error.response.data.message);
     }
