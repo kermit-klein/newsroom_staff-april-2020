@@ -39,6 +39,7 @@ describe("Journalist can create an article", () => {
       cy.get("#message").should("contain", "Article successfully created!");
       cy.get("input#title").should("not.have.value", "This is the title");
       cy.get("textarea#body").should("not.have.value", "This is the body");
+      cy.get("#preview-image").should("not.be.visible");
       cy.wait(3000);
       cy.get("#message").should("not.be.visible");
     });
