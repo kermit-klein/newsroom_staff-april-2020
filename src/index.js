@@ -9,9 +9,13 @@ import "./css/index.css";
 import { Provider } from "react-redux";
 import configureStore from "./state/store/configureStore";
 
-axios.defaults.baseURL = "http://localhost:3000/api";
+if (process.env.NODE_ENV === "production") {
+  axios.defaults.baseURL = process.env.REACT_APP_HEROKUURL;
+} else if (process.env.NODE_ENV === "development") {
+  axios.defaults.baseURL = process.env.REACT_APP_LOCALURL;
+}
 const store = configureStore();
-window.store = store
+window.store = store;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
