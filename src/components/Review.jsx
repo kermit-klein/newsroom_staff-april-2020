@@ -6,10 +6,13 @@ import Preview from "./Preview";
 import { Link } from "react-router-dom";
 import fetchWrapper from "../modules/fetchArticle";
 import createHeaders from "../modules/headers";
+import { connect, useSelector } from "react-redux";
 
-const Review = () => {
+const Review = (props) => {
   const [unpublishedArticleList, setUnpublishedArticleList] = useState([]);
-  const [selectedArticle, setSelectedArticle] = useState();
+  //   const [selectedArticle, setSelectedArticle] = useState();
+  const selectedArticle = useSelector((state) => state.selectedArticle);
+
   const [previewMessage, setPreviewMessage] = useState(
     "Select an article in the list to preview"
   );
@@ -38,9 +41,7 @@ const Review = () => {
             <List.Item
               key={article.id}
               id={`article-${article.id}`}
-              onClick={() =>
-                fetchWrapper(setSelectedArticle, setPreviewMessage, article.id)
-              }
+              onClick={(props) => fetchWrapper}
             >
               <List.Icon
                 name="exclamation"
@@ -71,7 +72,7 @@ const Review = () => {
     );
 
   const previewRender = selectedArticle ? (
-    <Preview selectedArticle={selectedArticle} />
+    <Preview />
   ) : (
     <div id="preview-message">{previewMessage}</div>
   );
@@ -88,4 +89,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default connect()(Review);

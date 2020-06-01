@@ -3,14 +3,15 @@ import axios from "axios";
 import UpdateArticle from "./UpdateArticle";
 import createHeaders from "../modules/headers";
 import fetchWrapper from "../modules/fetchArticle";
+import { connect, useSelector } from "react-redux";
 
 const PublishArticle = (props) => {
-  const [selectedArticle, setSelectedArticle] = useState();
-  const [message, setMessage] = useState("");
+  const selectedArticle = useSelector((state) => state.selectedArticle);
   const [radio, setRadio] = useState("free");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetchWrapper(setSelectedArticle, setMessage, props.match.params.id);
+    fetchWrapper(props.match.params.id);
   }, []);
 
   const onSubmitHandler = async () => {
@@ -40,8 +41,6 @@ const PublishArticle = (props) => {
         {selectedArticle && (
           <UpdateArticle
             onSubmitHandler={onSubmitHandler}
-            selectedArticle={selectedArticle}
-            message={message}
             setRadio={setRadio}
             radio={radio}
           />
@@ -51,4 +50,4 @@ const PublishArticle = (props) => {
   );
 };
 
-export default PublishArticle;
+export default connect()(PublishArticle);

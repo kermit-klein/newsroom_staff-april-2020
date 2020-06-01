@@ -2,14 +2,18 @@ import React from "react";
 import categoryList from "../modules/category";
 import { Container, Grid, Form, Dropdown, Button } from "semantic-ui-react";
 import Preview from "./Preview";
+import { connect, useSelector } from "react-redux";
 
 const UpdateArticle = (props) => {
+  const selectedArticle = useSelector((state) => state.selectedArticle);
+  const message = useSelector((state) => state.message);
+
   const categories = categoryList();
   return (
     <Grid columns={2}>
       <Grid.Column id="left">
         <Container>
-          <Preview selectedArticle={props.selectedArticle} />
+          <Preview />
         </Container>
       </Grid.Column>
       <Grid.Column>
@@ -20,7 +24,7 @@ const UpdateArticle = (props) => {
               selection
               id="category"
               name="category"
-              placeholder={props.selectedArticle.category}
+              placeholder={selectedArticle.category}
               options={categories}
             ></Dropdown>
           </Form.Field>
@@ -53,11 +57,11 @@ const UpdateArticle = (props) => {
           <Button id="publish-btn" type="submit">
             Publish Article
           </Button>
-          <p id="message">{props.message}</p>
+          <p id="message">{message}</p>
         </Form>
       </Grid.Column>
     </Grid>
   );
 };
 
-export default UpdateArticle;
+export default connect()(UpdateArticle);
