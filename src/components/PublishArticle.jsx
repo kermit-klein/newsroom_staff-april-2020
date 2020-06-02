@@ -14,7 +14,8 @@ const PublishArticle = (props) => {
   }, []);
 
   const onSubmitHandler = async (e) => {
-    
+    //if sweden is true check if international is true or false
+  //if sweden is false then set international true
     try {
       const response = await axios.put(
         `/admin/articles/${props.match.params.id}`,
