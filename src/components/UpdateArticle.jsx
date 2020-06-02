@@ -58,14 +58,14 @@ const UpdateArticle = (props) => {
               <Form.Field>
                   <input 
                   id="checkbox-sweden" 
-                  label="Local News Sweden" 
-                  name="Local News Sweden"
+                  name="local"
+                  value={false}
                   type="checkbox" />
                 <label style={{ display: "inline" }}> Local News Sweden </label>
                 <input
                   id="checkbox-International"
-                  label="International News"
-                  name="International News"
+                  name="international"
+                  value={false}
                   type="checkbox" />
                 <label style={{ display: "inline" }}> International News </label>
                 

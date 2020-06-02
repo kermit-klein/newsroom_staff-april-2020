@@ -14,6 +14,7 @@ const PublishArticle = (props) => {
   }, []);
 
   const onSubmitHandler = async (e) => {
+    
     try {
       const response = await axios.put(
         `/admin/articles/${props.match.params.id}`,

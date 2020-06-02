@@ -21,12 +21,11 @@ describe("editor can publish articles", () => {
       cy.get("#category").should("contain", "Sport");
       cy.get("#radio-free").should("be.checked");
 
-      it("and adding location", () => {
-        cy.get("#checkbox-sweden").click();
-        cy.get("#checkbox-sweden").should("be.checked");
-        cy.get("#checkbox-International").click();
-        cy.get("#checkbox-International").should("be.checked");
-      });
+      it("check checkbox location", () => {
+        cy.get("#checkbox-sweden").should("not.be.checked")
+        cy.get("#checkbox-International").should("not.be.checked")
+    })
+      
     });
   });
 
@@ -40,9 +39,14 @@ describe("editor can publish articles", () => {
       });
     });
 
-    it("change category and publish", () => {
+    it("change category and add location and publish", () => {
       cy.get("#category").click();
       cy.get("#category > .visible > :nth-child(4)").click();
+        cy.get("#checkbox-sweden").click();
+        cy.get("#checkbox-sweden").should("be.checked")
+        cy.get("#checkbox-International").click();
+        cy.get("#checkbox-International").should("be.checked")
+  
       cy.get("#publish-btn").click();
       cy.get("#message").should("contain", "Article successfully published!");
     });
