@@ -23,6 +23,7 @@ const PublishArticle = (props) => {
           category: document
             .getElementById("category")
             .firstElementChild.innerText.toLowerCase(),
+      
         },
         {
           headers: createHeaders(),

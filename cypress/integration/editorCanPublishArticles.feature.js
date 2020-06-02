@@ -20,6 +20,7 @@ describe("editor can publish articles", () => {
       cy.get("#body").should("contain", "Lorem ipsum dolor");
       cy.get("#category").should("contain", "Sport");
       cy.get("#radio-free").should("be.checked");
+      cy.get("#checkbox-sweden").should("be.checked")
     });
   });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import categoryList from "../modules/category";
-import { Container, Grid, Form, Dropdown, Button } from "semantic-ui-react";
+import { Container, Grid, Form, Dropdown, Button, Checkbox } from "semantic-ui-react";
 import Preview from "./Preview";
 import { useSelector } from "react-redux";
 
@@ -47,6 +47,7 @@ const UpdateArticle = (props) => {
                   type="radio"
                 />
                 <label style={{ display: "inline" }}> Premium</label>
+                <Checkbox id="checkbox-sweden" label='Local news Sweden' />
               </Form.Field>
               <Button id="publish-btn" type="submit">
                 Publish Article
