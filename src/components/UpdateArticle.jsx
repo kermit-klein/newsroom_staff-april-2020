@@ -6,7 +6,6 @@ import {
   Form,
   Dropdown,
   Button,
-  Checkbox,
 } from "semantic-ui-react";
 import Preview from "./Preview";
 import { useSelector } from "react-redux";
@@ -54,9 +53,9 @@ const UpdateArticle = (props) => {
                   type="radio"
                 />
                 <label style={{ display: "inline" }}> Premium</label>
-                </Form.Field>
+              </Form.Field>
               <Form.Field>
-                  <input 
+                <input 
                   id="checkbox-sweden" 
                   name="local"
                   value={false}
@@ -68,7 +67,6 @@ const UpdateArticle = (props) => {
                   value={false}
                   type="checkbox" />
                 <label style={{ display: "inline" }}> International News </label>
-                
               </Form.Field>
               <Button id="publish-btn" type="submit">
                 Publish Article
