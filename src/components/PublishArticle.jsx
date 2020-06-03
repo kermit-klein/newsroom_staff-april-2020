@@ -8,14 +8,22 @@ import { useDispatch } from "react-redux";
 const PublishArticle = (props) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
+  const location = ""
+  const international= ""
 
   useEffect(() => {
     fetchArticle(dispatch, setMessage, props.match.params.id);
   }, []);
 
   const onSubmitHandler = async (e) => {
-    //if sweden is true check if international is true or false
-  //if sweden is false then set international true
+
+    if (e.target.local.value) {
+      location = "sweden"
+        international = e.target.international.value
+    }
+    else {
+      international = true
+}
     try {
       const response = await axios.put(
         `/admin/articles/${props.match.params.id}`,
@@ -25,7 +33,8 @@ const PublishArticle = (props) => {
           category: document
             .getElementById("category")
             .firstElementChild.innerText.toLowerCase(),
-      
+          location: location,
+          international: international
         },
         {
           headers: createHeaders(),
