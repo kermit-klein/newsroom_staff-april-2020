@@ -40,7 +40,10 @@ const CreateArticle = () => {
         },
         { headers: createHeaders() }
       );
+      e.target.reset()
+      setImagePreview("")
       setMessage(response.data.message);
+      setTimeout(() => {setMessage("")}, 3000)
     } catch (error) {
       setMessage(error.response.data.message);
     }
