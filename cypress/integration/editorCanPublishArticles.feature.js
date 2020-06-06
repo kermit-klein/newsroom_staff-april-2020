@@ -1,4 +1,4 @@
-describe("editor can publish articles", () => {
+describe("editor", () => {
   beforeEach(() => {
     cy.login("editor");
     cy.route({
@@ -13,23 +13,24 @@ describe("editor can publish articles", () => {
     });
     cy.get("#review-nav").click();
   });
-  describe("editor can checkout article", () => {
-    it("can view checkout article", () => {
+
+  describe("can checkout article", () => {
+    it("can view checked-out article", () => {
       cy.get("#checkout-article-1").click();
       cy.get("#preview-title").should("contain", "title 1");
       cy.get("#body").should("contain", "Lorem ipsum dolor");
       cy.get("#category").should("contain", "Sport");
       cy.get("#radio-free").should("be.checked");
-
-      it("check checkbox location", () => {
-        cy.get("#checkbox-sweden").should("not.be.checked")
-        cy.get("#checkbox-International").should("not.be.checked")
-    })
-      
     });
+
+    it("and navigate back to list of articles", () => {
+      cy.get("#checkout-article-1").click();
+      cy.get("button").contains("Back to list").click()
+      cy.get("#article-list").should('be.visible')
+    })
   });
 
-  describe("editor can change properties and publish", () => {
+  describe("can change properties and successfully publish", () => {
     beforeEach(() => {
       cy.get("#checkout-article-1").click();
       cy.route({
@@ -42,19 +43,34 @@ describe("editor can publish articles", () => {
     it("change category and add location and publish", () => {
       cy.get("#category").click();
       cy.get("#category > .visible > :nth-child(4)").click();
-        cy.get("#checkbox-sweden").click();
-        cy.get("#checkbox-sweden").should("be.checked")
-        cy.get("#checkbox-International").click();
-        cy.get("#checkbox-International").should("be.checked")
-  
+      cy.get("#checkbox-sweden").click();
+      cy.get("#checkbox-sweden").should("be.checked");
+      cy.get("#checkbox-International").click();
+      cy.get("#checkbox-International").should("be.checked");
       cy.get("#publish-btn").click();
-      cy.get("#message").should("contain", "Article successfully published!");
+      cy.get("#success-message").should("contain", "Article successfully published!");
     });
 
     it("change article class and publish", () => {
-      cy.get('[type="radio"]').last().check();
+      cy.get("#checkbox-sweden").click();
+      cy.get('#radio-premium').check();
       cy.get("#publish-btn").click();
-      cy.get("#message").should("contain", "Article successfully published!");
+      cy.get("#success-message").should("contain", "Article successfully published!");
     });
+
+    it('"Publish" button disappears after publishing', () => {
+      cy.get("#checkbox-sweden").click();
+      cy.get('#radio-premium').check();
+      cy.get("#publish-btn").click();
+      cy.get("#publish-btn").should('not.exist')
+    })
   });
+
+  describe("cannot publish", () => {
+    it("without choosing either 'local' or 'international'", () => {
+      cy.get("#checkout-article-1").click();
+      cy.get("#publish-btn").click();
+      cy.get("#error-message").should("contain", "Please select either local or international");
+    })
+  })
 });

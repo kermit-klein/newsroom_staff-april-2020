@@ -39,8 +39,8 @@ const WritingForm = (props) => {
             placeholder="Write your article here"
           />
         </Form.Field>
-        <Button id="post" type="submit">
-          Post Article
+        <Button color="teal" loading={props.loading} id="post" type="submit">
+          Submit Article
         </Button>
         <p id="message">{props.message}</p>
       </Form>
