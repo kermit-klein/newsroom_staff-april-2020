@@ -69,7 +69,7 @@ p {
   display: flex !important; 
   flex-direction: column !important; 
   justify-content: space-between !important;
-  align-items: flex-start;
+  align-items: flex-start !important;
 }
 
 .publishing-form {
@@ -83,4 +83,9 @@ p {
 
 label {
   margin: 10px !important;
+}
+
+#error-message {
+  position: absolute;
+  top: 300px;
 }

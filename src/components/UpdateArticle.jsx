@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import categoryList from "../modules/category";
 import { Container, Grid, Form, Dropdown, Button } from "semantic-ui-react";
 import Preview from "./Preview";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const UpdateArticle = (props) => {
   const selectedArticle = useSelector((state) => state.article);
   const categories = categoryList();
+  const dispatch = useDispatch()
+
+  const resetSingleArticle = () => {
+    dispatch({
+      type: "RESET_ARTICLE_PREVIEW"
+    })
+  }
 
   return (
     <>
@@ -18,7 +25,7 @@ const UpdateArticle = (props) => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Container id="form-container">
-            <Link to="/review" id="back-btn">
+            <Link to="/review" id="back-btn" onClick={resetSingleArticle}>
               <Button>Back to list</Button>
             </Link>
             {props.message === "Article successfully published!" ? (

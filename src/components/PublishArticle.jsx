@@ -42,7 +42,6 @@ const PublishArticle = (props) => {
         setLoading(false);
         setMessage(response.data.message);
       } catch (error) {
-        debugger;
         setLoading(false);
         setMessage(error.response.data.message);
       }

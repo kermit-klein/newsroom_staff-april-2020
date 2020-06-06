@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Input, Dropdown, Image } from "semantic-ui-react";
+import { Form, Button, Input, Dropdown } from "semantic-ui-react";
 import categoryList from "../modules/category";
 
 const WritingForm = (props) => {

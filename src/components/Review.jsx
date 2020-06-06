@@ -32,7 +32,7 @@ const Review = () => {
 
   const unpublishedArticlesRender =
     unpublishedArticleList.length === 0 ? (
-      <p id="no-articles">There isn't any unpublished articles</p>
+      <p id="no-articles">There aren't any unpublished articles</p>
     ) : (
       <List divided relaxed>
         {unpublishedArticleList.map((article) => {
@@ -72,7 +72,7 @@ const Review = () => {
         })}
       </List>
     );
-  const previewRender = singleArticle.created_at ? (
+  const previewRender = singleArticle.id && !singleArticle.published ? (
     <Preview />
   ) : (
     <div id="preview-message">{previewMessage}</div>
