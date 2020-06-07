@@ -43,9 +43,8 @@
 }
 
 #body {
-  margin-top: 25px;
+  margin: 25px;
   text-align: justify !important;
   word-wrap: normal;
   font-size: 18px;
-  width: 80%
 }
