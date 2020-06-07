@@ -1,5 +1,3 @@
-import { Button } from "semantic-ui-react";
-
 describe("editor", () => {
   beforeEach(() => {
     cy.login("editor");
