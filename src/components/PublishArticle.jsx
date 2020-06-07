@@ -43,6 +43,7 @@ const PublishArticle = (props) => {
         setMessage(response.data.message);
         dispatch({ type: "RESET_ARTICLE_PREVIEW" })
       } catch (error) {
+        debugger
         setLoading(false);
         setMessage(error.response.data.message);
       }
