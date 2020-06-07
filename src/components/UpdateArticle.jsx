@@ -24,7 +24,6 @@ const UpdateArticle = (props) => {
           <Grid.Column id="preview" width={8}>
             <Preview selectedArticle={selectedArticle} />
           </Grid.Column>
-          <Grid.Column width={4}>
             <Container id="form-container">
               <Link to="/review" id="back-btn">
                 <Button>Back to list</Button>
@@ -33,7 +32,7 @@ const UpdateArticle = (props) => {
                 <p id="success-message">{props.message}</p>
               ) : (
                 <Form
-                  className="publishing-form"
+                  id="publishing-form"
                   onSubmit={(e) => props.onSubmitHandler(e)}
                 >
                   <Form.Field>
@@ -79,22 +78,23 @@ const UpdateArticle = (props) => {
                       value={false}
                       type="checkbox"
                       label="International News"
-                      style={{paddingRight: "2px"}}
+                      style={{ paddingRight: "2px" }}
                     />
                   </Form.Field>
-                  <Button
-                    loading={props.loading}
-                    color="teal"
-                    id="publish-btn"
-                    type="submit"
-                  >
-                    Publish Article
-                  </Button>
+                  <Form.Field>
+                    <Button
+                      loading={props.loading}
+                      color="teal"
+                      id="publish-btn"
+                      type="submit"
+                    >
+                      Publish Article
+                    </Button>
+                  </Form.Field>
                   <p id="error-message">{props.message}</p>
                 </Form>
               )}
             </Container>
-          </Grid.Column>
         </Grid>
       )}
     </>

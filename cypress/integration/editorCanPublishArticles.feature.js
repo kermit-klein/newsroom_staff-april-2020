@@ -1,4 +1,9 @@
 describe("editor", () => {
+  const free = ":nth-child(2) > :nth-child(1) > label"
+  const premium = ":nth-child(2) > :nth-child(2) > label"
+  const locationSweden = ":nth-child(3) > :nth-child(1) > label" 
+  const international = ":nth-child(3) > :nth-child(2) > label" 
+  
   beforeEach(() => {
     cy.login("editor");
     cy.route({
@@ -43,9 +48,9 @@ describe("editor", () => {
     it("change category and add location and publish", () => {
       cy.get("#category").click();
       cy.get("#category > .visible > :nth-child(4)").click();
-      cy.get("#checkbox-sweden").click();
+      cy.get(locationSweden).click();
       cy.get("#checkbox-sweden").should("be.checked");
-      cy.get("#checkbox-International").click();
+      cy.get(international).click();
       cy.get("#checkbox-International").should("be.checked");
       cy.get("#publish-btn").click();
       cy.get("#success-message").should(
@@ -55,8 +60,8 @@ describe("editor", () => {
     });
 
     it("change article class and publish", () => {
-      cy.get("#checkbox-sweden").click();
-      cy.get("#radio-premium").check();
+      cy.get(locationSweden).click();
+      cy.get(premium).click();
       cy.get("#publish-btn").click();
       cy.get("#success-message").should(
         "contain",
@@ -74,8 +79,8 @@ describe("editor", () => {
       });
       cy.get("#article-1").click();
       cy.get("#checkout-article-1").click();
-      cy.get("#checkbox-sweden").click();
-      cy.get("#radio-premium").check();
+      cy.get(locationSweden).click();
+      cy.get(premium).click();
       cy.get("#publish-btn").click();
     });
 
