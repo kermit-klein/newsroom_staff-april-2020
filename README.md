@@ -2,6 +2,8 @@
 
 [![Build Status](https://semaphoreci.com/api/v1/erikbjoern/newsroom_staff-april-2020/branches/dependabot-npm_and_yarn-websocket-extensions-0-1-4/badge.svg)](https://semaphoreci.com/erikbjoern/newsroom_staff-april-2020)
 
+![Img](https://i.imgur.com/a5WFGZb.png)
+
 
 The objective was to create a news platform that allow for the staff to create, review and publish news, and for users to browse both local and international news, as well as a mobile version of the user client.
 
